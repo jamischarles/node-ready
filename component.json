@@ -5,7 +5,8 @@
   "version": "0.0.1",
   "keywords": [],
   "dependencies": {
-    "fs-components/qwery": "*"
+    "component/query": "*",
+    "jamischarles/query-qwery": "*"
     },
   "development": {},
   "license": "MIT",

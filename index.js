@@ -8,10 +8,11 @@
  * Module dependencies
  * 
  */ 
-var qwery = require('qwery');
+require('query-qwery'); //query fallback for old browsers
+var query = require('query');
 
 //first 2 params are required
-module.exports = function(query, success, failure, cfg){
+module.exports = function(query_str, success, failure, cfg){
   cfg = cfg || {};
   failure = failure || function(){};
 
@@ -30,30 +31,30 @@ module.exports = function(query, success, failure, cfg){
     }
   };
 
-  debugLog('query: ' + query);
+  debugLog('query: ' + query_str);
   
   //set timeout
 
   
 
   var isElFound = function(el_query){
-    return qwery(el_query);
+    return query.all(el_query);
   }
   
   var abortPolling = function(){
     //cancel poll timer
-    debugLog(query + ' el not found. Aborting.')
+    debugLog(query_str + ' el not found. Aborting.')
     clearTimeout(poll_timer);
-    failure(query);
+    failure(query_str);
   }
 
   var pollDom = function(){
-    debugLog('polling for ' + query);
-    var el_array = isElFound(query);
+    debugLog('polling for ' + query_str);
+    var el_array = isElFound(query_str);
 
     //if yes, pass nodes to success
     if (el_array.length !== 0){
-      debugLog(query + " found");
+      debugLog(query_str + " found");
       //cancel timeout timer
       clearTimeout(failure_timer);
 
@@ -70,5 +71,4 @@ module.exports = function(query, success, failure, cfg){
   
   pollDom();
 
-}
-
+};

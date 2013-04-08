@@ -71,5 +71,4 @@ module.exports = function(query_str, success, failure, cfg){
   
   pollDom();
 
-}
-
+};
